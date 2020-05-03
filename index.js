@@ -52,10 +52,10 @@
   function displayResults(responseJson) {
     console.log(responseJson);
     //replace the existing image with the new one
-    for (i = 0; responseJson.message.length > i; i++)
+    for (var i = 0; responseJson.message.length > i; i++)
     {
       let img = new Image(200, 200);
-      img.src = message[i];
+      img.src = responseJson.message[i];
 
       let src = document.getElementById("dogImages");
       src.appendChild(img);
