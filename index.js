@@ -50,6 +50,8 @@ function getDogImage() {
 function displayResults(responseJson) {
   console.log(responseJson);
   //replace the existing image with the new one
+  let dogPictures = [];
+
   for (var i = 0; responseJson.message.length > i; i++)
   {
     let img = new Image(200, 200);
@@ -58,7 +60,11 @@ function displayResults(responseJson) {
     let src = document.getElementById("dogImages");
     src.appendChild(img);
 
+    dogPictures.push(img);
   }
+  
+  $("#dogImages").html(dogPictures);
+
   //display the results section
   $('.results').removeClass('hidden');
 }
