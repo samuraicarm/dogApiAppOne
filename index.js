@@ -1,7 +1,5 @@
   'use strict';
-
   let dogLink = " ";
-  let dogApi ="https://dog.ceo/api/breeds/image/random/";
 
   $(document).ready(function(){
     console.log("ready");
@@ -15,29 +13,25 @@
   function watchForm() {
     $('form').submit(event => {
       event.preventDefault();
-     let userInput = getValue();
-      appendURL(userInput);
+     let userInput = getBreed();
+      updateURL(userInput);
       getDogImage(); 
     });
 
   }
 
   //get value from form
-  function getValue(){
-    let formValue = document.getElementById('myInput').value;
-    return formValue 
+  function getBreed(){
+    let dogBreed = document.getElementById('userInput').value;
+    return dogBreed
   }
 
 
-  //append URL to include form value
-  function appendURL(formValue){
-    dogLink = dogApi.concat(formValue);
-    console.log(formValue) 
-    
+  //update URL to include form value
+  function updateURL(dogBreed){
+   dogLink = `https://dog.ceo/api/breed/${dogBreed}/images/random/1`;
+    console.log(dogLink) 
   } 
-
- 
-
 
   //fetch dog image from api
 
@@ -45,26 +39,29 @@
     fetch(dogLink)
       .then(response => response.json())
       .then(responseJson => displayResults(responseJson))
-      .catch(error => alert('Something went wrong. Try again later.'));
+      .catch(error => alert('Breed not found. Try again.'));
   }
 
 
   function displayResults(responseJson) {
     console.log(responseJson);
     //replace the existing image with the new one
-    for (var i = 0; responseJson.message.length > i; i++)
-    {
-      let img = new Image(200, 200);
-      img.src = responseJson.message[i];
+    $('.results-img').replaceWith(
+      `<img src="${responseJson.message}" class="results-img" width="500" height="500">`)
 
-      let src = document.getElementById("dogImages");
-      src.appendChild(img);
-    }
     //display the results section
     $('.results').removeClass('hidden');
   }
 
- 
-
+  //if no results found, post default image
+   function displayError (responseJson){
+     if (responseJson.message.status = 'error') {
+     $('.results-img').replaceWith(
+      `<img src="/img/sadpuppy.jpg" class="results-img" width="500" height="500">`)
+      $('.results').removeClass('hidden');
+      $('.text').removeClass('hidden');
+     }
+    }
+   
    
  

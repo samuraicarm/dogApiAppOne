@@ -10,17 +10,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>Dog API: Get Number of Dogs</h1>
+        <h1>Dog API: Get Dog Breed</h1>
 
         <form>
-            <label for="DogNumber">Number of Dogs:</label><br>
-            <input type="number" class= "quantity" name="quantity" min="1" max="50" value="3" id="myInput">
+            <label for="DogNumber">Dog Breed</label><br>
+            <input type="text"  name="breed"  id="userInput" value="">
           <input type="submit" value="Get a dog pic!">
         </form>
         <section class="results hidden">
-          <h2>Your dog pictures</h2>
-          <div id="dogImages" style="width:auto;"></div>
-
+          <div class="message">
+          <h2>Look at this breed!</h2>
+          <h2 class = "text hidden"> Dog not found, Try Again.</h2>
+          <img class="results-img" alt="placeholder">
+        </div>
+        </section>
       
         </section>
     </div>
